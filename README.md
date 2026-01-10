@@ -8,6 +8,17 @@ A modern investment portfolio dashboard built with Next.js, React, and TailwindC
 - Real-time stock ticker display
 - Interactive portfolio performance chart
 - Sector allocation breakdown
+````markdown
+# Investment Dashboard
+
+A modern investment portfolio dashboard built with Next.js, React, and TailwindCSS.
+
+## Features
+
+- User profile with net worth tracking
+- Real-time stock ticker display
+- Interactive portfolio performance chart
+- Sector allocation breakdown
 - News feed for market updates
 
 ## Getting Started
@@ -22,7 +33,29 @@ npm install
 npm run dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
+3. Build and start production locally:
+```bash
+npm run build
+npm start
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Deploying to Vercel
+
+This repo is Vercel-ready. Deploy by importing the GitHub repo in Vercel with defaults:
+
+- Framework preset: Next.js
+- Build command: `npm run build`
+- Output directory: `.next`
+
+Or via CLI:
+```bash
+npm i -g vercel
+vercel
+```
+
+No env vars are required. API routes gracefully fall back to mock data if the external provider fails.
 
 ## Tech Stack
 
@@ -69,3 +102,5 @@ Edit the mock data in `data/mockData.ts` to customize:
 - Add authentication
 - Implement data persistence with a database
 - Add more interactive features
+
+````
