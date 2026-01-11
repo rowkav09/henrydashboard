@@ -1,13 +1,13 @@
 import { Stock, PortfolioData, SectorAllocation, UserProfile, NewsItem } from '@/types';
 
 export const mockStocks: Stock[] = [
-  { symbol: 'AAPL', change: 12.3 },
-  { symbol: 'AMZN', change: 3.1 },
-  { symbol: 'TSLA', change: 8.2 },
-  { symbol: 'NVDA', change: 11.7 },
-  { symbol: 'GONY', change: 16.2 },
-  { symbol: 'TACO', change: 14.5 },
-  { symbol: 'ESPN', change: -0.4 },
+  { symbol: 'AAPL', change: 2.5 },
+  { symbol: 'MSFT', change: 1.8 },
+  { symbol: 'NVDA', change: 3.2 },
+  { symbol: 'GOOGL', change: 1.2 },
+  { symbol: 'AMZN', change: 2.1 },
+  { symbol: 'TSLA', change: -1.5 },
+  { symbol: 'META', change: 2.8 },
 ];
 
 export const mockPortfolioData: PortfolioData[] = [
@@ -26,12 +26,12 @@ export const mockPortfolioData: PortfolioData[] = [
 ];
 
 export const mockSectorAllocation: SectorAllocation[] = [
-  { name: 'Tech', percentage: 20, color: '#22c55e' },
-  { name: 'Entertainment', percentage: 4, color: '#ef4444' },
-  { name: 'Retail', percentage: 5, color: '#22c55e' },
-  { name: 'Energy', percentage: 12, color: '#22c55e' },
-  { name: 'Finance', percentage: 2, color: '#22c55e' },
-  { name: 'Oil', percentage: 44, color: '#22c55e' },
+  { name: 'Technology', percentage: 45, color: '#3b82f6' },
+  { name: 'Healthcare', percentage: 20, color: '#ef4444' },
+  { name: 'Financial Services', percentage: 15, color: '#22c55e' },
+  { name: 'Industrials', percentage: 12, color: '#06b6d4' },
+  { name: 'Consumer Cyclical', percentage: 5, color: '#f59e0b' },
+  { name: 'Communication Services', percentage: 3, color: '#8b5cf6' },
 ];
 
 export const mockUserProfile: UserProfile = {
@@ -46,8 +46,8 @@ export const mockUserProfile: UserProfile = {
 };
 
 export const mockNews: NewsItem[] = [
-  { title: 'Annual Target Met: Tech', impact: 'positive' },
-  { title: 'New Results: Retail', impact: 'positive' },
-  { title: 'Pricing Alert: Wheat', impact: 'negative' },
-  { title: 'Geopolitical News', impact: 'negative' },
+  { title: 'AI boom drives chip stocks higher', impact: 'positive', source: 'Reuters' },
+  { title: 'Fed signals potential rate cuts ahead', impact: 'positive', source: 'Bloomberg' },
+  { title: 'Tech sector outperforms market', impact: 'positive', source: 'MarketWatch' },
+  { title: 'Bond yields rise on inflation data', impact: 'negative', source: 'CNBC' },
 ];
