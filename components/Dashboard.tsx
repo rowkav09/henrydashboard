@@ -12,6 +12,7 @@ import MarketIndices from './MarketIndices';
 import RecentActivity from './RecentActivity';
 import PortfolioMetrics from './PortfolioMetrics';
 import TopMovers from './TopMovers';
+import EditProfileModal from './EditProfileModal';
 import { Stock, PortfolioData, PortfolioHolding } from '@/types';
 import { Plus } from 'lucide-react';
 
@@ -28,14 +29,27 @@ export default function Dashboard() {
     name: 'User',
     netWorth: 0,
     yearsExperience: 0,
-    browseMarket: 'NYSE, NASDAQ'
+    browseMarket: 'NYSE, NASDAQ',
+    age: 0,
+    path: 'Finance',
+    salary: 0,
+    company: ''
   });
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   // Load portfolio from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('portfolio');
     if (saved) {
       setHoldings(JSON.parse(saved));
+    }
+  }, []);
+
+  // Load user profile from localStorage
+  useEffect(() => {
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile) {
+      try { setUserProfile(JSON.parse(savedProfile)); } catch {}
     }
   }, []);
 
@@ -218,24 +232,21 @@ export default function Dashboard() {
     return () => clearInterval(interval);
   }, [holdings, selectedChart]);
 
-  // Fetch news separately, only when holdings change
+  // Fetch news on load and whenever holdings change (falls back when empty)
   useEffect(() => {
     const fetchNews = async () => {
       try {
         const holdingSymbols = holdings.map(h => h.symbol).join(',');
-        const response = await fetch(`/api/news?symbols=${holdingSymbols || 'AAPL,MSFT,GOOG'}`);
+        const symbolsParam = holdingSymbols || 'AAPL,MSFT,GOOG';
+        const response = await fetch(`/api/news?symbols=${symbolsParam}`);
         const data = await response.json();
-        if (data.news) {
-          setNews(data.news);
-        }
+        if (data.news) setNews(data.news);
       } catch (error) {
         // Silently handle error
       }
     };
 
-    if (holdings.length > 0) {
-      fetchNews();
-    }
+    fetchNews();
   }, [holdings]);
 
   const handleAddStock = (holding: Omit<PortfolioHolding, 'id'>) => {
@@ -256,13 +267,21 @@ export default function Dashboard() {
       {/* Compact Header */}
       <div className="flex items-center justify-between mb-2 gap-2">
         <UserHeader profile={userProfile} />
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 bg-gradient-to-br from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-lg border border-green-500/30 text-sm whitespace-nowrap"
-        >
-          <Plus size={16} />
-          Add Stock
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowProfileModal(true)}
+            className="flex items-center gap-2 bg-gradient-to-br from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-lg border border-indigo-500/30 text-sm whitespace-nowrap"
+          >
+            Edit Profile
+          </button>
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="flex items-center gap-2 bg-gradient-to-br from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-lg border border-green-500/30 text-sm whitespace-nowrap"
+          >
+            <Plus size={16} />
+            Add Stock
+          </button>
+        </div>
       </div>
 
       {/* Main Grid - 4 columns, fits on screen */}
@@ -375,6 +394,16 @@ export default function Dashboard() {
 
       {showAddModal && (
         <AddStockModal onAdd={handleAddStock} onClose={() => setShowAddModal(false)} />
+      )}
+      {showProfileModal && (
+        <EditProfileModal
+          initial={userProfile}
+          onSave={(p) => {
+            setUserProfile(p);
+            try { localStorage.setItem('userProfile', JSON.stringify(p)); } catch {}
+          }}
+          onClose={() => setShowProfileModal(false)}
+        />
       )}
     </div>
   );
