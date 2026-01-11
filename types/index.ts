@@ -1,6 +1,7 @@
 export interface Stock {
   symbol: string;
   change: number;
+  changePercent?: number;
   price?: number;
 }
 
@@ -29,6 +30,7 @@ export interface UserProfile {
 export interface NewsItem {
   title: string;
   impact: 'positive' | 'negative';
+  source?: string;
 }
 
 export interface PortfolioHolding {

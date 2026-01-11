@@ -274,7 +274,7 @@ export default function Dashboard() {
             todayChangePercent={holdings.length > 0 ? (
               (holdings.reduce((sum, h) => {
                 const stock = stocks.find(s => s.symbol === h.symbol);
-                return sum + (stock ? stock.changePercent : 0);
+                return sum + (stock ? stock.change : 0);
               }, 0) / holdings.length)
             ) : 0}
           />

@@ -33,7 +33,7 @@ export default function TopMovers({ stocks }: TopMoversProps) {
               <div key={stock.symbol} className="flex items-center justify-between p-2 bg-green-500/5 border border-green-500/20 rounded-lg hover:bg-green-500/10 transition-all">
                 <div>
                   <div className="font-semibold text-white text-sm">{stock.symbol}</div>
-                  <div className="text-xs text-gray-400">${stock.price.toFixed(2)}</div>
+                  <div className="text-xs text-gray-400">${(stock.price || 0).toFixed(2)}</div>
                 </div>
                 <div className="flex items-center gap-1 text-green-400 font-semibold text-sm">
                   <TrendingUp size={14} />
@@ -51,7 +51,7 @@ export default function TopMovers({ stocks }: TopMoversProps) {
               <div key={stock.symbol} className="flex items-center justify-between p-2 bg-red-500/5 border border-red-500/20 rounded-lg hover:bg-red-500/10 transition-all">
                 <div>
                   <div className="font-semibold text-white text-sm">{stock.symbol}</div>
-                  <div className="text-xs text-gray-400">${stock.price.toFixed(2)}</div>
+                  <div className="text-xs text-gray-400">${(stock.price || 0).toFixed(2)}</div>
                 </div>
                 <div className="flex items-center gap-1 text-red-400 font-semibold text-sm">
                   <TrendingDown size={14} />
