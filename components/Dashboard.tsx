@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { mockSectorAllocation, mockUserProfile, mockNews } from '@/data/mockData';
 import StockTicker from './StockTicker';
 import PortfolioChart from './PortfolioChart';
 import SectorAllocation from './SectorAllocation';
@@ -24,7 +23,13 @@ export default function Dashboard() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [sectors, setSectors] = useState<any[]>([]);
   const [selectedChart, setSelectedChart] = useState<string>('portfolio');
-  const [news, setNews] = useState<any[]>(mockNews);
+  const [news, setNews] = useState<any[]>([]);
+  const [userProfile, setUserProfile] = useState<any>({
+    name: 'User',
+    netWorth: 0,
+    yearsExperience: 0,
+    browseMarket: 'NYSE, NASDAQ'
+  });
 
   // Load portfolio from localStorage
   useEffect(() => {
@@ -250,7 +255,7 @@ export default function Dashboard() {
     <div className="h-full flex flex-col overflow-hidden">
       {/* Compact Header */}
       <div className="flex items-center justify-between mb-2 gap-2">
-        <UserHeader profile={mockUserProfile} />
+        <UserHeader profile={userProfile} />
         <button
           onClick={() => setShowAddModal(true)}
           className="flex items-center gap-2 bg-gradient-to-br from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-lg border border-green-500/30 text-sm whitespace-nowrap"
@@ -331,12 +336,12 @@ export default function Dashboard() {
             )}
             
             <div className="mt-3 flex justify-between items-center text-xs text-gray-400">
-              <span className="font-semibold">YEARS EXP: {mockUserProfile.yearsExperience}</span>
-              <span>Browse in Market: {mockUserProfile.browseMarket}</span>
+              <span className="font-semibold">YEARS EXP: {userProfile.yearsExperience || 0}</span>
+              <span>Browse in Market: {userProfile.browseMarket || 'NYSE, NASDAQ'}</span>
             </div>
           </div>
 
-          <SectorAllocation sectors={sectors.length > 0 ? sectors : mockSectorAllocation} />
+          <SectorAllocation sectors={sectors} />
 
           <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-3 border border-gray-700/50 shadow-lg">
             <h2 className="text-sm font-semibold mb-2 text-gray-200">

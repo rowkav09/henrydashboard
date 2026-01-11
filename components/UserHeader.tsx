@@ -16,13 +16,13 @@ export default function UserHeader({ profile }: UserHeaderProps) {
         <div className="flex-1">
           <h1 className="text-lg font-bold text-white">{profile.name}</h1>
           <p className="text-xs text-gray-400">
-            Net Worth: <span className="text-green-400 font-semibold">${profile.netWorth.toLocaleString()}</span> | 
-            Age: {profile.age} | {profile.path}
+            Net Worth: <span className="text-green-400 font-semibold">${(profile.netWorth || 0).toLocaleString()}</span> | 
+            Age: {profile.age || 'N/A'} | {profile.path}
           </p>
         </div>
         <div className="text-right">
           <p className="text-xs text-gray-400">Salary</p>
-          <p className="text-base font-semibold text-green-400">${profile.salary.toLocaleString()}</p>
+          <p className="text-base font-semibold text-green-400">${(profile.salary || 0).toLocaleString()}</p>
           <p className="text-xs text-gray-500">{profile.company}</p>
         </div>
       </div>

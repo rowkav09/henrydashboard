@@ -80,7 +80,10 @@ export default function PortfolioChart({ data, chartKey }: PortfolioChartProps) 
             color: '#fff',
             fontSize: '12px'
           }}
-          formatter={(value: number) => [`$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, 'Value']}
+          formatter={(value: any) => {
+            if (typeof value !== 'number') return ['N/A', 'Value'];
+            return [`$${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, 'Value'];
+          }}
         />
         <Line 
           type="monotone" 
