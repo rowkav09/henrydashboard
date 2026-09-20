@@ -8,7 +8,6 @@ A modern investment portfolio dashboard built with Next.js, React, and TailwindC
 - Real-time stock ticker display
 - Interactive portfolio performance chart
 - Sector allocation breakdown
-````markdown
 # Investment Dashboard
 
 A modern investment portfolio dashboard built with Next.js, React, and TailwindCSS.
@@ -103,4 +102,3 @@ Edit the mock data in `data/mockData.ts` to customize:
 - Implement data persistence with a database
 - Add more interactive features
 
-````
